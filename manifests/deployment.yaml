@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: naro-vorn3227-spring-next-deployment
+  labels:
+    app: naro-vorn3227-spring-next
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: naro-vorn3227-spring-next
+  template:
+    metadata:
+      labels:
+        app: naro-vorn3227-spring-next
+    spec:
+      containers:
+        - name: naro-vorn3227-spring-next-container
+          image: pipejet/naro-vorn3227-spring-next:0
+          ports:
+            - containerPort: 3000
