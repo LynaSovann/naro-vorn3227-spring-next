@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: naro-vorn3227-spring-next-https-ingress
+  namespace: naro-vorn3227-spring-next
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - naro-vorn3227-spring-next.assessify.org
+      secretName: naro-vorn3227-spring-next-secret-tls
+  rules:
+    - host: naro-vorn3227-spring-next.assessify.org
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: naro-vorn3227-spring-next-service
+                port:
+                  number: 8326
